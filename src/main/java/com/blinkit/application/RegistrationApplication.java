@@ -1,4 +1,4 @@
-package com.authentication.registration;
+package com.blinkit.application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
