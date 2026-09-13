@@ -1,5 +1,7 @@
 package com.blinkit.application.userAuth.advices;
 
+import com.blinkit.application.cart.exceptions.EmptyCartException;
+import com.blinkit.application.cart.exceptions.InsufficientStockException;
 import com.blinkit.application.productAndCategory.exceptions.CategoryAlreadyExistsException;
 import com.blinkit.application.productAndCategory.exceptions.CategoryNotFoundException;
 import com.blinkit.application.productAndCategory.exceptions.DarkStoreNotFoundException;
@@ -86,6 +88,18 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiError> handleStoreNotFound(DarkStoreNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(new ApiError(ex.getMessage(), 404, LocalDateTime.now(), null));
+    }
+
+    @ExceptionHandler(InsufficientStockException.class)
+    public ResponseEntity<ApiError> handleStoreNotFound(InsufficientStockException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ApiError(ex.getMessage(), 400, LocalDateTime.now(), null));
+    }
+
+    @ExceptionHandler(EmptyCartException.class)
+    public ResponseEntity<ApiError> handleStoreNotFound(EmptyCartException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ApiError(ex.getMessage(), 400, LocalDateTime.now(), null));
     }
 
 

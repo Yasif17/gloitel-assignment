@@ -1,9 +1,11 @@
 package com.blinkit.application.userAuth.config;
 
+import com.blinkit.application.cart.entities.Cart;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
@@ -15,6 +17,15 @@ public class RedisConfig {
         template.setConnectionFactory(connectionFactory);
         template.setKeySerializer(new StringRedisSerializer());
         template.setValueSerializer(new StringRedisSerializer());
+        return template;
+    }
+
+    @Bean
+    public RedisTemplate<String, Cart> cartRedisTemplate(RedisConnectionFactory factory) {
+        RedisTemplate<String, Cart> template = new RedisTemplate<>();
+        template.setConnectionFactory(factory);
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setValueSerializer(new GenericJackson2JsonRedisSerializer());  // serializes Cart as JSON
         return template;
     }
 
