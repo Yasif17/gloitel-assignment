@@ -1,5 +1,9 @@
 package com.blinkit.application.userAuth.advices;
 
+import com.blinkit.application.productAndCategory.exceptions.CategoryAlreadyExistsException;
+import com.blinkit.application.productAndCategory.exceptions.CategoryNotFoundException;
+import com.blinkit.application.productAndCategory.exceptions.DarkStoreNotFoundException;
+import com.blinkit.application.productAndCategory.exceptions.ProductNotFoundException;
 import com.blinkit.application.userAuth.exceptions.InvalidCredentialsException;
 import com.blinkit.application.userAuth.exceptions.UserAlreadyExistException;
 import com.blinkit.application.userAuth.exceptions.UserNotFoundException;
@@ -56,5 +60,33 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiError);
     }
+
+    // ── Category module ─────────────────────────
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ResponseEntity<ApiError> handleCategoryNotFound(CategoryNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ApiError(ex.getMessage(), 404, LocalDateTime.now(), null));
+    }
+
+    @ExceptionHandler(CategoryAlreadyExistsException.class)
+    public ResponseEntity<ApiError> handleCategoryExists(CategoryAlreadyExistsException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new ApiError(ex.getMessage(), 409, LocalDateTime.now(), null));
+    }
+
+    // ── Product module ──────────────────────────
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<ApiError> handleProductNotFound(ProductNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ApiError(ex.getMessage(), 404, LocalDateTime.now(), null));
+    }
+
+    // ── Dark store / inventory module ───────────
+    @ExceptionHandler(DarkStoreNotFoundException.class)
+    public ResponseEntity<ApiError> handleStoreNotFound(DarkStoreNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ApiError(ex.getMessage(), 404, LocalDateTime.now(), null));
+    }
+
 
 }

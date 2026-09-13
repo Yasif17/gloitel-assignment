@@ -15,7 +15,7 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("""
-        SELECT new com.blinkit.clone.dtos.ProductCardResponse(
+        SELECT new com.blinkit.application.productAndCategory.dtos.response.ProductCardResponse(
             p.id, p.slug, p.name, p.image, p.mrp, p.sellingPrice, p.unit,
             CASE WHEN i.quantity > 0 THEN true ELSE false END)
         FROM Product p
