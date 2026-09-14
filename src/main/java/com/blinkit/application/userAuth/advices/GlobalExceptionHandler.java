@@ -2,6 +2,7 @@ package com.blinkit.application.userAuth.advices;
 
 import com.blinkit.application.cart.exceptions.EmptyCartException;
 import com.blinkit.application.cart.exceptions.InsufficientStockException;
+import com.blinkit.application.order.exceptions.OrderNotFoundException;
 import com.blinkit.application.productAndCategory.exceptions.CategoryAlreadyExistsException;
 import com.blinkit.application.productAndCategory.exceptions.CategoryNotFoundException;
 import com.blinkit.application.productAndCategory.exceptions.DarkStoreNotFoundException;
@@ -9,6 +10,8 @@ import com.blinkit.application.productAndCategory.exceptions.ProductNotFoundExce
 import com.blinkit.application.userAuth.exceptions.InvalidCredentialsException;
 import com.blinkit.application.userAuth.exceptions.UserAlreadyExistException;
 import com.blinkit.application.userAuth.exceptions.UserNotFoundException;
+import com.blinkit.application.wishlist.exceptions.ProductAlreadyInWishlistException;
+import com.blinkit.application.wishlist.exceptions.WishlistItemNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -100,6 +103,25 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiError> handleStoreNotFound(EmptyCartException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new ApiError(ex.getMessage(), 400, LocalDateTime.now(), null));
+    }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ResponseEntity<ApiError> handleOrderNotFound(OrderNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ApiError(ex.getMessage(), 404, LocalDateTime.now(), null));
+    }
+
+
+    @ExceptionHandler(ProductAlreadyInWishlistException.class)
+    public ResponseEntity<ApiError> handleAlreadyInWishlist(ProductAlreadyInWishlistException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new ApiError(ex.getMessage(), 409, LocalDateTime.now(), null));
+    }
+
+    @ExceptionHandler(WishlistItemNotFoundException.class)
+    public ResponseEntity<ApiError> handleWishlistItemNotFound(WishlistItemNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ApiError(ex.getMessage(), 404, LocalDateTime.now(), null));
     }
 
 
