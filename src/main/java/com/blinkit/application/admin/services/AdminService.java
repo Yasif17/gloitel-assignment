@@ -1,4 +1,4 @@
-package com.blinkit.application.userAuth.services;
+package com.blinkit.application.admin.services;
 
 import com.blinkit.application.userAuth.dtos.response.UserSummaryDto;
 import com.blinkit.application.userAuth.enums.Role;

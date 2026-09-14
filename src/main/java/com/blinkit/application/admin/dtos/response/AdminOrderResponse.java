@@ -1,4 +1,4 @@
-package com.blinkit.application.cart.dtos.response;
+package com.blinkit.application.admin.dtos.response;
 
 import java.time.LocalDateTime;
 

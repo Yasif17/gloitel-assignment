@@ -1,6 +1,6 @@
 package com.blinkit.application.order.services;
 
-import com.blinkit.application.cart.dtos.response.AdminOrderResponse;
+import com.blinkit.application.admin.dtos.response.AdminOrderResponse;
 import com.blinkit.application.order.dtos.requests.PlaceOrderRequest;
 import com.blinkit.application.order.dtos.response.OrderResponse;
 import com.blinkit.application.order.dtos.response.OrderSummaryResponse;

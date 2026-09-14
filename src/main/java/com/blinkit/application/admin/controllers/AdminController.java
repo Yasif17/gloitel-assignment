@@ -1,8 +1,8 @@
-package com.blinkit.application.userAuth.controllers;
+package com.blinkit.application.admin.controllers;
 
 import com.blinkit.application.userAuth.dtos.response.UserSummaryDto;
 import com.blinkit.application.userAuth.enums.Role;
-import com.blinkit.application.userAuth.services.AdminService;
+import com.blinkit.application.admin.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

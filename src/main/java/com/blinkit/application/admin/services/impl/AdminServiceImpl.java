@@ -1,11 +1,11 @@
-package com.blinkit.application.userAuth.services.impl;
+package com.blinkit.application.admin.services.impl;
 
+import com.blinkit.application.admin.services.AdminService;
 import com.blinkit.application.userAuth.dtos.response.UserSummaryDto;
 import com.blinkit.application.userAuth.entities.User;
 import com.blinkit.application.userAuth.enums.Role;
 import com.blinkit.application.userAuth.exceptions.UserNotFoundException;
 import com.blinkit.application.userAuth.repositories.UserRepository;
-import com.blinkit.application.userAuth.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,7 @@ public class AdminServiceImpl implements AdminService {
 
         List<UserSummaryDto> result = new ArrayList<>();
 
-        for(User u:users){
+        for (User u : users) {
             UserSummaryDto dto = new UserSummaryDto();
             dto.setId(u.getId());
             dto.setName(u.getName());
@@ -44,7 +44,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void updateRole(Long id, Role role) {
         User user = userRepository.findById(id).orElseThrow(
-                ()-> new UserNotFoundException("User not found")
+                () -> new UserNotFoundException("User not found")
         );
         user.setRole(role);
         userRepository.save(user);

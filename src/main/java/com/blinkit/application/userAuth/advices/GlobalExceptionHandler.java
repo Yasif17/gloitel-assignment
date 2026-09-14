@@ -38,7 +38,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UserAlreadyExistException.class)
     public ResponseEntity<ApiError> handleUserExists(UserAlreadyExistException ex) {
-        System.out.println(ex.getMessage());
+//        System.out.println(ex.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(new ApiError(ex.getMessage(), 409, LocalDateTime.now(), null));
     }
